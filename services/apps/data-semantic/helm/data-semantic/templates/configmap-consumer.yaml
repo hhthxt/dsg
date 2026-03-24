@@ -32,9 +32,9 @@ data:
         Username: {{ .Values.depServices.mq.auth.username }}
         Password: {{ .Values.depServices.mq.auth.password }}
       Redis:
-        Host: {{ .Values.depServices.redis.host }}
-        Port: {{ .Values.depServices.redis.port }}
-        Password: {{ .Values.depServices.redis.password }}
+        Host: {{ .Values.depServices.redis.connectInfo.sentinelHost }}
+        Port: {{ .Values.depServices.redis.connectInfo.sentinelPort }}
+        Password: {{ .Values.depServices.redis.connectInfo.sentinelPassword }}
         Channel: messages
 
     DB:
@@ -52,6 +52,6 @@ data:
         SlowThreshold: 200
 
     Cache:
-      - Host: {{ .Values.depServices.redis.host }}
+      - Host: {{ .Values.depServices.redis.connectInfo.sentinelHost }}:{{ .Values.depServices.redis.connectInfo.sentinelPort }}
         Type: node
 {{- end }}

@@ -1,4 +1,5 @@
 namespace: anyshare
+replicaCount: 1
 
 labels:
   deployment:
@@ -55,12 +56,16 @@ depServices:
   class-443:
     ingressClass: class-443
   rds:
-    type: mariadb
+    admin_key: ''
     host: mariadb-mariadb-master.resource.svc.cluster.local
+    hostRead: 'mariadb-mariadb-master.resource.svc.cluster.local'
     port: 3330
-    user: anyshare
-    password: xxx
-    database: af_main
+    portRead: 3330
+    source_type: internal
+    type: MariaDB
+    user: 'anyshare'
+    password: ''
+    database: 'af_main'
   hydra:
     administrativeHost: hydra-admin
     administrativePort: 4445
@@ -72,19 +77,27 @@ depServices:
     host: af-sailor-agent
     port: 9595
   mq:
-    mqType: kafka
-    mqHost: kafka-headless.resource
-    mqPort: 9097
     auth:
-      username: kafkaclient
-      password: xxx
+      mechanism: 'PLAIN'
+      username: 'kafkaclient'
+      password: ''
+    mqHost: 'kafka-headless.resource'
+    mqLookupdHost: ""
+    mqLookupdPort: 0
+    mqPort: 9097
+    mqType: kafka
   redis:
-    host: proton-redis-proton-redis-sentinel.resource.svc.cluster.local
-    port: 26379
+    connectInfo:
+      masterGroupName: mymaster
+      password: ''
+      sentinelHost: proton-redis-proton-redis-sentinel.resource.svc.cluster.local
+      sentinelPassword: ''
+      sentinelPort: 26379
+      sentinelUsername: root
+      username: root
+    connectType: sentinel
+    sourceType: internal
     database: 0
-    password: xxx
-
-replicaCount: 1
 
 resources:
   requests:

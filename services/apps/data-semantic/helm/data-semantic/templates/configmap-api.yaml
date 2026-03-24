@@ -55,10 +55,10 @@ data:
 
     # Redis 配置 (可选)
     Redis:
-      Host: {{ .Values.depServices.redis.host }}
-      Port: {{ .Values.depServices.redis.port }}
+      Host: {{ .Values.depServices.redis.connectInfo.sentinelHost }}
+      Port: {{ .Values.depServices.redis.connectInfo.sentinelPort }}
       DB: {{ .Values.depServices.redis.database }}
-      Password: {{ .Values.depServices.redis.password | quote }}
+      Password: {{ .Values.depServices.redis.connectInfo.sentinelPassword | quote }}
 
     # 认证配置
     Auth:
