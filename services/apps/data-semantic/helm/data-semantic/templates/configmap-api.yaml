@@ -81,7 +81,7 @@ data:
 
     # AI 服务配置
     AIService:
-      URL: "{{ .Values.depServices.af-sailor-service.protocol }}://{{ .Values.depServices.af-sailor-service.host }}:{{ .Values.depServices.af-sailor-service.port }}"
+      URL: '{{ index .Values.depServices "af-sailor-service" "protocol" }}://{{ index .Values.depServices "af-sailor-service" "host" }}:{{ index .Values.depServices "af-sailor-service" "port" }}'
       TimeoutSeconds: 10
 
     # UserManagement 服务配置
